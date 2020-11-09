@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Voice Command Chess" />
+    <meta name="author" content="Dason Wang" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Voice Command Chess</title>
+    <!-- Firebase -- >
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script
+      src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"
+      defer
+    ></script>
+    <script
+      src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"
+      defer
+    ></script>
+
+    <!-- Favicon 
+    <link rel="icon" type="image/png" href="img/chesspieces/wikipedia/bN.png" />
+-->
+    <!-- Redirect to http-->
+    <link rel="canonical" href="https://chess-api-4.glitch.me" />
+
+    <!-- jQuery -->
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+      defer
+    ></script>
+
+    <!-- import chessboard.js, a javascript library which renders the chessboard -->
+    <script src="js/chessboard-1.0.0.min.js" defer></script>
+    <link rel="stylesheet" href="css/chessboard-1.0.0.css" />
+
+    <!-- import chess.js, a javascript library which validates moves and sets the rules -->
+    <script src="chessrules/chess.min.js" defer></script>
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- import the webpage's javascript file -->
+    <script src="script.js" defer></script>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Charm&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cousine&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Google Material Design Icons -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+  <body onresize="screenResized()">
+    <div id="page-container">
+      <div class="grid-container">
+        <div class="topNav">
+          <div id="title">
+            Voice Command Chess
+          </div>
+          <div class="topBut" id="settings">
+            <span class="desktopText">Settings</span
+            ><span id="settingsBut" class="material-icons">
+              settings
+            </span>
+          </div>
+          <div class="topBut" id="download">
+            <span class="desktopText">Download</span>
+            <span id="downloadBut" class="material-icons">
+              get_app
+            </span>
+          </div>
+        </div>
+        <div id="selection">
+          <button class="button1" onclick="soloMode()">
+            Solo
+          </button>
+          <button class="button1" onclick="fade('#selection', '#lobby')">
+            Multiplayer
+          </button>
+        </div>
+        <div id="lobby">
+          <div id="lobbyNav">
+            <button class="button1" onclick="$('#lobbylightbox').show()">
+              New Game
+            </button>
+            <button class="button1" onclick="fade('#lobby', '#selection')">
+              Exit
+            </button>
+            <p id="ponline">Players Online: 0</p>
+          </div>
+          <div id="lobbylightbox">
+            <button class="button2" onclick="$('#lobbylightbox').hide(); $('#scold').hide()">
+              x
+            </button>
+            <div id="roomSettings">
+              <label for="gamename">Game Name:</label><br />
+              <input
+                class="setText"
+                type="text"
+                id="submitName"
+                name="gamename"
+                oninput="crop(this)"
+              />
+              <br />
+              <label for="password">Password:</label><br />
+              <input
+                class="setText"
+                type="text"
+                id="submitPass"
+                name="password"
+                oninput="crop(this)"
+              />
+              <br />
+              <label for="minset">Minutes:</label>
+              <input
+                type="number"
+                class="setNum"
+                id="submitMin"
+                name="minset"
+                oninput="crop(this)"
+                min="2"
+              />
+              <br />
+              <label for="secset">Seconds:</label>
+              <input
+                type="number"
+                class="setNum"
+                id="submitSec"
+                name="secset"
+                oninput="crop(this)"
+                min="0"
+              />
+              <br />
+              <button class="button1" onclick="createRoom()">START</button>
+            </div>
+            <span id="scold">Tsk tsk. Your time must be 2 minutes or more.</span>
+          </div>
+          <div id="roomList"></div>
+        </div>
+        <div id="status">
+          <div class="gameNav">
+            <button class="flipBut" id="flip" onclick="flipBoard()">
+              &nbsp;
+            </button>
+            <button class="button1" onclick="resetBoard()">
+              Reset
+            </button>
+            <button class="button1" onclick="exitBoard('solo')">
+              Exit
+            </button>
+          </div>
+        </div>
+        <div id="board"></div>
+        <div id="controls">
+          <div class="gameNav">
+            <span class="desktopText"
+              >Voice Commands <span id="vcActive">Disabled</span> <br
+            /></span>
+            <span class="material-icons" id="mic" onclick="micPress()"
+              >mic_off</span
+            >
+            <div class="desktopText" id="commandLogs"></div>
+          </div>
+        </div>
+      </div>
+      <footer>
+        <p id="footerText">
+          Coded by Dason Wang<span class="desktopText"
+            >, an enlightened individual.</span
+          >
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>

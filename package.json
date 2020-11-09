@@ -1,0 +1,33 @@
+{
+  "//1": "describes your app and its dependencies",
+  "//2": "updating this file will download and update your packages",
+  "name": "Voice-Command-Chess",
+  "version": "1.0.0",
+  "description": "A singleplayer chess game with voice controls.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-http-to-https": "^1.1.4",
+    "firebase-tools": "^8.15.1",
+    "body-parser": "^1.19.0",
+    "node-fetch": "^2.6.1"
+  },
+  "engines": {
+    "node": "12.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/chess-api-4"
+  },
+  "author": "Dason Wang",
+  "license": "MIT",
+  "keywords": [
+    "chess",
+    "chessboard.js",
+    "chess.js",
+    "firebase",
+    "express"
+  ]
+}

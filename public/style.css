@@ -1,0 +1,549 @@
+/* Css formatted to match appearance of elements from top to bottom of HTML page. 
+If you cannot find an item being styled, look at general placement and you'll have 
+a good idea of where it fits on the page.*/
+
+/* App is responsive for portrait and landscape configurations.*/
+
+/* When screen is less than 250px in width, the chess pieces become difficult to pick up, 
+so I didn't bother to style it.*/
+
+/* Color Pallete 
+Coffee Black (background color) #3b2f2f;
+Light tan (chessboard and panel color) #f8ecda;
+Light Brown (chessboard and panel color) #dac4b1;
+Navy Blue (main color for nav and footer) #305D82;
+Lighter blue (highlights board, accents) #a5b4cb;
+Darker blue (highlights board, accents) #6390b5;
+*/
+
+/*First, I'm going to style body and set predefined classes*/
+
+body {
+  width: 100vw;
+  height: 100vh;
+  font-family: helvetica, arial, sans-serif;
+  margin: 0;
+  text-align: center;
+  background-color: #3b2f2f;
+  font-family: "Cousine", monospace;
+  touch-action: none;
+  /* A bunch of code to make everything unhighlight-able */
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+.desktopText {
+  display: none;
+}
+
+#alternateTitle {
+  display: none;
+}
+
+.button1 {
+  padding: 5px;
+  background-color: #a5b4cb;
+  color: #335;
+  font-family: "Cousine", monospace;
+  font-weight: bold;
+  border: #335 solid 2px;
+  border-radius: 5px;
+}
+
+.button1:hover {
+  background-color: #6390b5;
+  color: ghostwhite;
+  transition: all 300ms linear;
+  cursor: pointer;
+}
+
+.button2 {
+  position: absolute;
+  top: 0.25%;
+  right: 0.5%;
+  font-size: 20px;
+  font-weight: bold;
+  height: 3ch;
+  width: 3ch;
+  padding-bottom: 3px;
+  background-color: #eee;
+  color: #335;
+  border: #335 solid 2px;
+  border-radius: 50%;
+}
+
+.button2:hover {
+  background-color: white;
+  cursor: pointer;
+}
+
+/* Desktop style for buttons and text*/
+@media only screen and (min-width: 600px) {
+  .desktopText {
+    display: block;
+  }
+}
+
+/* Begin styling page from top to bottom */
+#page-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Topnav contains my title + settings/download buttons */
+.topNav {
+  border-bottom: #a5b4cb solid 1.5px;
+  background-color: #305D82;
+  padding-left: 5px;
+  padding-top: 2px;
+  grid-area: tn;
+  color: ghostwhite;
+}
+
+#title {
+  font-size: calc(4vw + 8px);
+  font-family: "Charm", cursive;
+  float: left;
+  padding-left: 1px;
+  color: white;
+}
+#title:hover {
+  cursor: default;
+}
+
+.topBut {
+  float: right;
+  margin-top: 1vw;
+  margin-right: 6px;
+  padding: 1px;
+}
+
+.topBut:hover {
+  cursor: pointer;
+}
+
+#downloadBut {
+  font-size: 145%;
+}
+
+/* selection screen contains two buttons for solo and mulitplayer */
+#selection {
+  border-bottom: #a5b4cb solid 1.5px;
+  height: 181px;
+  /* Made this background myself */
+  background-image: url(https://cdn.glitch.com/e2f9f1db-bf7c-4bd8-884e-52662d48d19f%2Fpattern.png?v=1604186385671);
+  background-repeat: repeat;
+  grid-area: ss;
+}
+
+#selection .button1 {
+  width: 80%;
+  padding-top: 6px;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 20px;
+}
+
+/* Lobby styling begins here */
+#lobby {
+  position: relative;
+  top: 0;
+  left: 0;
+  display: none;
+  visibility: 0;
+  opacity: 0;
+  width: 90%;
+  height: 70vh;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  background-color: #dac4b1;
+  border: #f8ecda 2px solid;
+  border-radius: 20px;
+  color: #335;
+  grid-area: l;
+}
+
+#lobbyNav {
+  width: 100%;
+  border-radius: 16px 16px 0 0;
+  background-color: #f8ecda;
+  border-bottom: #335 2px solid;
+}
+
+#lobbyNav button {
+  margin-top: 5px;
+  font-size: 16px;
+  margin-right: 5px;
+  margin-left: 5px;
+  width: 12ch;
+}
+
+#lobbyNav p {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+#lobbylightbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  border-radius: 20px;
+  background: rgba(200, 200, 200, 0.9);
+  width: 100%;
+  height: 70vh;
+}
+
+#roomSettings {
+  padding-top: 30px;
+  font-size: calc(0.5vw + 18px);
+}
+
+#roomSettings button {
+  margin-top: 15px;
+  font-size: 25px;
+  display: inline-block;
+  width: 8ch;
+}
+
+#roomSettings input {
+  text-align: center;
+  border: gray 1.5px solid;
+  background-color: #eee;
+  border-radius: 5px;
+  outline: none;
+  color: #335;
+  margin-bottom: calc(1vw + 5px);
+}
+
+.setText {
+  font-size: 120%;
+  width: 12ch;
+}
+
+.setNum {
+  font-size: 110%;
+  width: 3.5ch;
+}
+
+#roomList {
+  padding: 0;
+  margin: 0;
+}
+
+/* only applys in mobile mode */
+@media only screen and (max-width: 600px) {
+  #roomList span {
+    font-size: 0.6em;
+  }
+}
+
+#roomList div {
+  list-style-type: none;
+  border-bottom: #335 2px solid;
+  padding-top: 10px;
+  padding-bottom: 37px;
+  font-size: 25px;
+  height: auto;
+}
+
+#roomList .material-icons {
+  float: left;
+  padding-left: 1%;
+}
+
+.nameOfTheGame {
+  float: left;
+  padding-left: 2.5%;
+  font-weight: bold;
+}
+
+.nameOfTheGame:hover {
+  cursor: pointer;
+}
+
+.timeOfTheGame {
+  float: right;
+  padding-right: 2.5%;
+  padding-left: 8%;
+}
+
+.capacityOfTheGame {
+  float: right;
+  padding-right: 1%;
+  font-weight: bold;
+}
+
+#scold {
+  display: none;
+  margin-top: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  color: indianred;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Shows status of game (checkmate, turn) and also opponent time when in multiplayer */
+#status {
+  box-sizing: border-box;
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  background-color: #dac4b1;
+  border-radius: 12px 12px 0 0;
+  width: 100%;
+  grid-area: st;
+}
+
+.gameNav {
+  width: 100%;
+  border-radius: 12px 12px 0 0;
+  background-color: #f8ecda;
+  border-bottom: #335 2px solid;
+}
+
+#status .button1 {
+  width: 7ch;
+}
+
+#status button {
+  margin-left: 1px;
+  margin-right: 1px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  font-family: "Cousine", monospace;
+  font-size: 16px;
+}
+
+.flipBut {
+  width: 4ch;
+  outline: none;
+  border-radius: 12px;
+  border: grey 2px solid;
+  padding: 5px;
+  background-color: #111;
+}
+
+.flipBut:hover {
+  cursor: pointer;
+}
+
+/* The playing board */
+#board {
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  width: 95vw;
+  margin-left: auto;
+  margin-right: auto;
+  grid-area: b;
+}
+
+/*242424*/
+/* All game controls */
+#controls {
+  box-sizing: border-box;
+  background-color: #dac4b1;
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  border-radius: 0 0 12px 12px;
+  color: #305D82;
+  width: 100%;
+  grid-area: c;
+}
+
+/* only applys in mobile mode */
+@media only screen and (max-width: 600px) {
+  #controls .gameNav {
+    border-radius: 0 0 12px 12px;
+  }
+}
+
+#mic {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 32px;
+  padding: 9px;
+  background-color: #ccc;
+  border-radius: 50%;
+  border: #305D82 2px solid;
+}
+
+#mic:hover {
+  cursor: pointer;
+}
+
+.grid-container {
+  /* Puts the grid container at 100% height of screen height, and flexes to allow footer to stay at the bottom. */
+  flex: 1;
+  height: 100%;
+  /* I'm combining grid and flexbox. Grid arranges elements into columns, flex vertically centers elements */
+  display: grid;
+  grid-template-columns: 2.5% 95% 2.5%;
+  grid-template-rows: auto auto 2vh auto auto auto auto;
+  grid-template-areas:
+    "tn tn tn"
+    "ss ss ss"
+    ". . ."
+    "l l l"
+    ". st ."
+    ". b ."
+    ". c .";
+}
+
+/* Footer gives credit to author */
+footer {
+  margin-top: 5px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 30px;
+  border-top: #a5b4cb solid 1.5px;
+  background-color: #305D82;
+}
+
+#footerText {
+  margin: 0;
+  padding-top: 5px;
+  font-size: 0.8em;
+  color: ghostwhite;
+}
+
+/* Begin resposive style for screens larger than 600px in resolution */
+/* All desktop monitors and medium tablets fit into this range */
+@media only screen and (min-width: 600px) {
+  .topNav {
+    border-width: 3px;
+  }
+
+  #title {
+    font-size: calc(2vw + 22px);
+    padding-left: 1%;
+    padding-bottom: 4px;
+  }
+
+  .topBut {
+    font-size: 1.1em;
+    margin-top: calc(1.5vw - 10px);
+    margin-right: 2%;
+    padding: 3px;
+  }
+
+  #selection {
+    height: 241px;
+    border-width: 3px;
+  }
+
+  #selection .button1 {
+    position: relative;
+    top: calc(50% - 70px);
+    left: calc(50% - 13ch - 40px);
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 13ch;
+    font-size: calc(2vw + 12px);
+    padding: 10px 8px 8px 8px;
+    float: left;
+  }
+
+  #lobby {
+    border-width: 4px;
+  }
+
+  #lobbyNav {
+    height: 60px;
+  }
+
+  #lobbyNav button {
+    float: left;
+    margin-left: 15px;
+    margin-top: 7px;
+    font-size: 22px;
+  }
+
+  #lobbyNav p {
+    float: right;
+    /* ex is the height of current font */
+    margin-top: calc(25px - 1ex);
+    margin-right: 15px;
+    font-size: calc(0.6vw + 12px);
+  }
+
+  #scold {
+    margin-top: 10px;
+    font-size: 20px;
+  }
+
+  #status {
+    border-radius: 12px;
+    border: #f8ecda 1.5px solid;
+  }
+
+  #statusNav {
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
+
+  #status button {
+    margin-top: 8px;
+    margin-bottom: 10px;
+  }
+
+  #board {
+    margin-left: auto;
+    margin-right: auto;
+    width: 60vw;
+    max-width: 700px;
+  }
+
+  #controls {
+    border-radius: 12px;
+    border: #f8ecda 1.5px solid;
+  }
+
+  #controls .desktopText {
+    padding-top: 6px;
+  }
+
+  #mic {
+    font-size: 40px;
+    padding: 10px;
+  }
+
+  .grid-container {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 0.75% auto 16% 1.25% clamp(200px, 61%, 700px) 1.25% 16% auto 0.75%;
+    grid-template-rows: auto auto 2vh auto auto;
+    grid-template-areas:
+      "tn tn tn tn tn tn tn tn tn"
+      "ss ss ss ss ss ss ss ss ss"
+      ". . . . . . . . ."
+      ". l l l l l l l ."
+      ". . st . b . c . .";
+  }
+
+  footer {
+    margin-top: 10px;
+    height: 45px;
+    border-width: 3px;
+  }
+
+  #footerText {
+    padding-top: 10px;
+    font-size: 1em;
+  }
+
+  #footerText .desktopText {
+    display: inline;
+  }
+}
